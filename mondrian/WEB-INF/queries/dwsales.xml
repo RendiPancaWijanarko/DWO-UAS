@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<Schema name="DW_UAS" description="schema DW UAS" measuresCaption="Mencari total profit">
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="customer_sales">
+        <Hierarchy name="dim_customer" visible="true" hasAll="true" allMemberName="all_customer" allLevelName="all_customer_level" primaryKey="CustomerID">
+            <Table name="customer_sales">
+            </Table>
+            <Level name="Customer_type" visible="true" column="CustomerID" nameColumn="CustomerType" ordinalColumn="CustomerID" type="Integer" internalType="int" uniqueMembers="true" levelType="Regular" hideMemberIf="Never" description="tipe dari customer" captionColumn="CustomerType">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="time_sales">
+        <Hierarchy name="dim_time" visible="true" hasAll="true" allMemberName="all_time" allLevelName="all_time_level" primaryKey="time_id">
+            <Table name="time_sales">
+            </Table>
+            <Level name="year" visible="true" column="time_id" nameColumn="tahun" ordinalColumn="time_id" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="month" visible="true" column="time_id" nameColumn="bulan" ordinalColumn="time_id" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="date" visible="true" column="time_id" nameColumn="tanggallengkap" ordinalColumn="time_id" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="produk_sales">
+        <Hierarchy name="dim_produk" visible="true" hasAll="true" allMemberName="all_produk" allLevelName="all_produk_level" primaryKey="ProductID">
+            <Table name="product_sales">
+            </Table>
+            <Level name="Subcategory" visible="true" column="ProductID" nameColumn="SubcategoryName" ordinalColumn="ProductID" type="String" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="productname" visible="true" column="ProductID" nameColumn="Name" ordinalColumn="ProductID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="location_sales">
+        <Hierarchy name="dim_location" visible="true" hasAll="true" allMemberName="all_location" allLevelName="all_location_level" primaryKey="TerritoryID">
+            <Table name="location_sales">
+            </Table>
+            <Level name="location name" visible="true" column="TerritoryID" nameColumn="Name" ordinalColumn="TerritoryID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="region" visible="true" column="TerritoryID" nameColumn="CountryRegionCode" ordinalColumn="TerritoryID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="group" visible="true" column="TerritoryID" nameColumn="Group" ordinalColumn="TerritoryID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="SalesPersonID" visible="true" column="TerritoryID" nameColumn="SalesPersonID" ordinalColumn="TerritoryID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="sales_sales">
+        <Hierarchy name="dim_sales" visible="true" hasAll="true" allMemberName="all_sales" allLevelName="all_sales_level" primaryKey="SalesOrderID">
+            <Table name="sales_sales">
+            </Table>
+            <Level name="salesorderID" visible="true" column="SalesOrderID" nameColumn="SalesOrderID" ordinalColumn="SalesOrderID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="OrderQty" visible="true" column="ProductID" nameColumn="OrderQty" ordinalColumn="ProductID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Cube name="cSales" visible="true" cache="true" enabled="true">
+        <Table name="fakta_sales">
+        </Table>
+        <DimensionUsage source="customer_sales" name="customer" visible="true" foreignKey="CustomerID" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="time_sales" name="time" visible="true" foreignKey="time_id" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="produk_sales" name="produk" visible="true" foreignKey="ProductID" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="location_sales" name="loc" visible="true" foreignKey="TerritoryID" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="sales_sales" name="sales" visible="true" foreignKey="SalesOrderID" highCardinality="false">
+        </DimensionUsage>
+        <Measure name="subtotal" column="SubTotal" datatype="Numeric" formatString="#,###" aggregator="sum" visible="true">
+        </Measure>
+        <Measure name="TotalProfit" column="TotalProfit" datatype="Numeric" formatString="#,###" aggregator="sum" visible="true">
+        </Measure>
+        <Measure name="commission" column="CommissionPct" datatype="Numeric" aggregator="sum" visible="true">
+        </Measure>
+        <Measure name="totaldue" column="TotalDue" datatype="Numeric" formatString="#,###" aggregator="sum" visible="true">
+        </Measure>
+        <Measure name="tax" column="TaxAmt" datatype="Numeric" formatString="#,###" aggregator="sum" visible="true">
+        </Measure>
+        <Measure name="freight" column="Freight" datatype="Numeric" formatString="#,###" aggregator="sum" visible="true">
+        </Measure>
+    </Cube>
+</Schema>

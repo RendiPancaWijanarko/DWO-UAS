@@ -1,0 +1,70 @@
+<Schema name="DW_UAS" description="schema DW UAS" measuresCaption="Mencari total profit">
+    <Dimension type="StandardDimension" visible="true" foreignKey="CustomerID" highCardinality="false" name="customer_dimension">
+        <Hierarchy name="customer" visible="true" hasAll="true" allMemberName="all_customer" allLevelName="all_customer_level" primaryKey="CustomerID" primaryKeyTable="customer_sales">
+            <Table name="customer_sales">
+            </Table>
+            <Level name="Customer_type" visible="true" table="customer_sales" column="CustomerType" nameColumn="CustomerType" ordinalColumn="CustomerType" parentColumn="CustomerType" type="Numeric" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" description="tipe dari customer" captionColumn="CustomerType">
+            </Level>
+            <Level name="Sales_Person" visible="true" table="customer_sales" column="SalesPersonID" nameColumn="SalesPersonID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" captionColumn="SalesPersonID">
+            </Level>
+            <Level name="teritory" visible="true" table="customer_sales" column="TerritoryID" nameColumn="TerritoryID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" captionColumn="TerritoryID">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" visible="true" foreignKey="time_id" highCardinality="false" name="time_dimension">
+        <Hierarchy name="time" visible="true" hasAll="true" allMemberName="all_time" allLevelName="all_time_level" primaryKey="time_id" primaryKeyTable="time_sales">
+            <Table name="time_sales">
+            </Table>
+            <Level name="year" visible="true" table="time_sales" column="tahun" nameColumn="tahun" ordinalColumn="tahun" parentColumn="tahun" type="Numeric" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="month" visible="true" table="time_sales" column="bulan" nameColumn="bulan" type="Numeric" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+            </Level>
+            <Level name="date" visible="true" table="time_sales" column="tanggal" nameColumn="tanggal" type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="ProductID" highCardinality="false" name="produk_dimension">
+        <Hierarchy name="produk" visible="true" hasAll="true" allMemberName="all_produk" allLevelName="all_produk_level" primaryKey="ProductID" primaryKeyTable="product_sales">
+            <Table name="product_sales">
+            </Table>
+            <Level name="Subcategory" visible="true" table="product_sales" column="ProductSubcategoryID" nameColumn="ProductSubcategoryID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="TerritoryID" highCardinality="false" name="location_dimension">
+        <Hierarchy name="location" visible="true" hasAll="true" allMemberName="all_location" allLevelName="all_location_level" primaryKey="TerritoryID" primaryKeyTable="location_sales">
+            <Table name="location_sales">
+            </Table>
+            <Level name="New Level 0" visible="true" table="location_sales" column="CountryRegionCode" nameColumn="CountryRegionCode" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="SalesOrderID" highCardinality="false" name="sales_dimension">
+        <Hierarchy name="sales" visible="true" hasAll="true" allMemberName="all_sales" allLevelName="all_sales_level" primaryKey="SalesOrderID" primaryKeyTable="sales_sales">
+            <Table name="sales_sales">
+            </Table>
+            <Level name="produkID" visible="true" table="sales_sales" column="ProductID" nameColumn="ProductID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="territoryID" visible="true" table="sales_sales" column="TerritoryID" nameColumn="TerritoryID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Cube name="sales" visible="true" cache="true" enabled="true">
+        <Table name="fakta_sales">
+        </Table>
+        <DimensionUsage source="customer_dimension" name="customer_dimension" visible="true" foreignKey="CustomerID" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="time_dimension" name="time_dimension" visible="true" foreignKey="time_id" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="produk_dimension" name="produk_dimension" visible="true" foreignKey="ProductID" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="location_dimension" name="location_dimension" visible="true" foreignKey="TerritoryID" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="sales_dimension" name="sales_dimension" visible="true" foreignKey="SalesOrderID" highCardinality="false">
+        </DimensionUsage>
+        <Measure name="subtotal" column="SubTotal" datatype="Numeric" formatString="#,###" aggregator="sum" visible="true">
+        </Measure>
+        <Measure name="TotalProfit" column="TotalProfit" datatype="Numeric" formatString="#,###" aggregator="sum" visible="true">
+        </Measure>
+    </Cube>
+</Schema>

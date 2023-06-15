@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<Schema name="dw_uas2">
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="culture_produk">
+        <Hierarchy name="dim_culture" visible="true" hasAll="true" allMemberName="all_culture" primaryKey="CultureID">
+            <Table name="culture_produk">
+            </Table>
+            <Level name="CultureName" visible="true" column="CultureID" nameColumn="Name" ordinalColumn="CultureID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="time_produk">
+        <Hierarchy name="dim_time" visible="true" hasAll="true" allMemberName="all_time" primaryKey="time_id">
+            <Table name="time_produk">
+            </Table>
+            <Level name="year" visible="true" column="time_id" nameColumn="tahun" ordinalColumn="time_id" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="month" visible="true" column="time_id" nameColumn="bulan" ordinalColumn="time_id" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="date" visible="true" column="time_id" nameColumn="tanggallengkap" ordinalColumn="time_id" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="transaction_produk">
+        <Hierarchy name="dim_transaction" visible="true" hasAll="true" allMemberCaption="all_transaction" primaryKey="TransactionID">
+            <Table name="transaksi_produk">
+            </Table>
+            <Level name="TransactionType" visible="true" column="TransactionID" nameColumn="TransactionType" ordinalColumn="TransactionID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="produk_produk">
+        <Hierarchy name="dim_produk" visible="true" hasAll="true" allMemberName="all_produk" primaryKey="ProductID">
+            <Table name="produk_produk">
+            </Table>
+            <Level name="category" visible="true" column="ProductID" nameColumn="SubcategoryName" ordinalColumn="ProductID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+            <Level name="nama produk" visible="true" column="ProductID" nameColumn="Name" ordinalColumn="ProductID" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Cube name="cProduk" visible="true" cache="true" enabled="true">
+        <Table name="fakta_produk">
+        </Table>
+        <DimensionUsage source="produk_produk" name="produk" visible="true" foreignKey="ProductID" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="transaction_produk" name="transaction" visible="true" foreignKey="TransactionID" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="culture_produk" name="culture" visible="true" foreignKey="CultureID" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="time_produk" name="time" visible="true" foreignKey="time_id" highCardinality="false">
+        </DimensionUsage>
+        <Measure name="UnitPrice" column="UnitPrice" datatype="Numeric" formatString="#,##" aggregator="avg" visible="true">
+        </Measure>
+        <Measure name="margin" column="margin" datatype="Numeric" formatString="#,##" aggregator="avg" visible="true">
+        </Measure>
+        <Measure name="Cost" column="StandardCost" datatype="Numeric" formatString="#,##" aggregator="avg" visible="true">
+        </Measure>
+    </Cube>
+</Schema>
