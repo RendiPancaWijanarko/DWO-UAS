@@ -6,9 +6,13 @@ Source code yang kami sediakan disini adalah sebuah dashboard data warehouse yan
 PERSYARATAN SYSTEM
 
 Sistem Operasi  : Windows 8 atau lebih, macOS, atau Linux
+
 Browser Web     : Google Chrome, Mozilla Firefox, Microsoft Bing
+
 Local Host      : Xampp Control Panel
+
 Modul           : Apache, MySQL, Tomcat (Mondrian)
+
 Database MySQL versi 7 atau yang lebih baru
 
 
