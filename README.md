@@ -2,14 +2,18 @@ DASHBOARD DATA WAREHOUSE
 
 Source code yang kami sediakan disini adalah sebuah dashboard data warehouse yang bertujuan untuk menyajikan data dari warehouse secara visual dan interaktif berdasarkan database AdventureWorks pada skema Sales dan Production.
 
+
 PERSYARATAN SYSTEM
+
 Sistem Operasi  : Windows 8 atau lebih, macOS, atau Linux
 Browser Web     : Google Chrome, Mozilla Firefox, Microsoft Bing
 Local Host      : Xampp Control Panel
 Modul           : Apache, MySQL, Tomcat (Mondrian)
 Database MySQL versi 7 atau yang lebih baru
 
+
 INSTALASI
+
 1. Silahkan unduh repository ini
 2. Extract file zip menggunakan 7zip atau WinRar
 3. Pindahkan folder "Dwo_AdvWorks" ke dalam directory C:\xampp\htdocs
@@ -23,6 +27,7 @@ INSTALASI
 11. Setelah instalasi berhasil, anda bisa melanjutkan ke tahap PENGGUNAAN APLIKASI
 
 PENGGUNAAN APLIKASI
+
 1. Buka website berbasis localhost anda dengan mengetikan link berikut pada browser kesayangan anda : http://localhost/Dwo_AdvWorks 
 2. Lakukan login dengan cara memasukkan akun yang valid sesuai yang tertera pada database. Berikut akun yang bisa anda gunakan :
 username  : rendi
@@ -31,6 +36,8 @@ password  : rendipanca
 4. Anda bisa melakukan penyimpanan grafik yang tersedia ke dalam PNG, JPEG, PDF, SVG, CSV, hingga file Excel (XLS)
 5. Setelah aktifitas selesai, silahkan lakukan logout.
 
+
 KONTAK
+
 Jika Anda memiliki pertanyaan atau memerlukan bantuan, jangan ragu untuk menghubungi kami melalui email di 21082010016@student.upnjatim.ac.id
 Terima kasih telah menggunakan aplikasi dashboard kami!
