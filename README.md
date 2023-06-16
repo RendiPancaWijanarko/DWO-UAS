@@ -21,12 +21,12 @@ INSTALASI
 1. Silahkan unduh repository ini
 2. Extract file zip menggunakan 7zip atau WinRar
 3. Pindahkan folder "Dwo_AdvWorks" ke dalam directory C:\xampp\htdocs
-4. Extract file "mondrian_dwo.rar" dan pindahkan ke dalam directory C:\xampp\tomcat\webapps 
+4. Pindahkan folder "mondrian" ke dalam directory C:\xampp\tomcat\webapps 
 5. Buka software Xampp Control Panel dan jalankan modul Apache, MySQL, dan Tomcat (Lakukan instalasi terlebih dahulu jika anda belum memiliki nya)
 6. Buka Browser kesayangan anda dan ketikan http://localhost/phpmyadmin/ lalu tekan enter
 7. Masukkan username dan password database localhost anda, untuk default biasanya memiliki credentials 'root' sebagai username dan password yang kosong
 8. Buat sebuah database baru dengan nama 'dwo_uas' (WAJIB karena pemrograman menggunakan framework CodeIgniter yang mengharuskan setiap elemen yang dipanggil sesuai dengan nama elemen yang sudah diinisiasi sebelumnya)
-9. Lakukan import database 'dwo_uas.sql' pada folder 'Database' (Jika gagal, artinya phpmyadmin anda terkena limit size, lakukan kompresi terhadap file 'dwo_uas.sql' dan ulangi cara nomor 7)
+9. Lakukan import database 'dwo_uas.sql' pada folder 'Database' (Jika gagal, artinya phpmyadmin anda terkena limit size, lakukan kompresi terhadap file 'dwo_uas.sql' dan ulangi cara nomor 9)
 10. Masuk ke dalam folder "Dwo_AdvWorks" yang sudah anda download
 11. Setelah instalasi berhasil, anda bisa melanjutkan ke tahap PENGGUNAAN APLIKASI
 
